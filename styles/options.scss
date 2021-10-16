@@ -1,0 +1,81 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.month-header {
+  font-size: 16px;
+}
+
+.month-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: flex-start;
+}
+
+.calendar {
+  padding: 20px;
+  box-shadow: 0 0 12px #ccc;
+}
+
+.month-week-header {
+  padding: 20px;
+}
+
+.month-week-header span {
+  background-color: lightskyblue;
+  color: #ffffff;
+  padding: 5px 15px;
+  border-radius: 50px;
+}
+
+.days-of-week {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.days-of-week span {
+  padding: 10px 15px;
+}
+
+.days-in-month {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.days-in-month span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18.00%;
+  padding: 20px 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.days-in-month span:not(.next-month)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background-color:lightskyblue;
+  border-radius: 100%;
+  z-index: -1;
+  opacity: 0;
+}
+
+.days-in-month span:not(.next-month):hover {
+  color: #ffffff;
+}
+
+.days-in-month span:not(.next-month):hover::before {
+  opacity: 1;
+}
