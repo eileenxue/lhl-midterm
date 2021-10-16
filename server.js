@@ -55,3 +55,8 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+app.get("/options", (req, res) => {
+  const templateVars = {}
+  res.render("options", templateVars)
+});
