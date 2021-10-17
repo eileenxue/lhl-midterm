@@ -1,0 +1,19 @@
+/**************************
+       CREATE PAGE
+***************************/
+
+.create-page{
+  width: 100%;
+}
+
+.create-form{
+  display: flex;
+  flex-direction: column;
+}
+
+// Media Queries for Create Page
+@media (min-width: 768px) {
+  .create-page{
+    width: 50vw;
+  }
+}

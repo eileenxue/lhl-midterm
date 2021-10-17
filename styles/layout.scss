@@ -1,6 +1,44 @@
 // See: https://sass-lang.com/
 
-body,
-html {
-  margin: 0;
+// For global site layout components
+
+// To account for the fixed footer
+main{
+  margin-bottom: 120px;
+}
+
+
+// Header
+
+
+
+
+
+
+
+
+// Footer
+
+.footer{
+  text-align: center;
+  background-color: white;
+  padding: 1em;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: 100px;
+
+
+  &-copyright{
+    font-size: 0.9em;
+  }
+
+  &-authors a{
+    text-decoration: none;
+  }
+}
+
+// Media Queries for global components
+@media (min-width: 768px) {
+
 }
