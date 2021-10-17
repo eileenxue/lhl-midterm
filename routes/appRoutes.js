@@ -17,5 +17,9 @@ module.exports = (db) => {
     res.render("options");
   });
 
+  router.get("/create", (req, res) => {
+    res.render("create");
+  });
+
   return router;
 };
