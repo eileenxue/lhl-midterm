@@ -1,9 +1,19 @@
-// Test Code
-body{
-  background-color: aliceblue;
+/**************************
+       CREATE PAGE
+***************************/
+
+.create-page{
+  width: 100%;
 }
 
-#create-event{
+.create-form{
   display: flex;
   flex-direction: column;
+}
+
+// Media Queries for Create Page
+@media (min-width: 768px) {
+  .create-page{
+    width: 50vw;
+  }
 }
