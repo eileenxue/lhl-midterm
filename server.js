@@ -60,3 +60,8 @@ app.get("/options", (req, res) => {
   const templateVars = {}
   res.render("options", templateVars)
 });
+
+app.get("/create", (req, res) => {
+  const templateVars = {}
+  res.render("create", templateVars)
+});
