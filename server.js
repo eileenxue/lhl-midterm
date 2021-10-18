@@ -55,11 +55,8 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-<<<<<<< HEAD
-=======
 
 app.get("/options", (req, res) => {
-  const templateVars = {};
-  res.render("options", templateVars);
+  const templateVars = {}
+  res.render("options", templateVars)
 });
->>>>>>> 110abd5 (calendar library)

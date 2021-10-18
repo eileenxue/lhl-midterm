@@ -1,6 +1,5 @@
 // Client facing scripts here
-<<<<<<< HEAD
-=======
+
 $(document).ready(function() {
   $('#calendar').evoCalendar({
     theme: 'Midnight Blue',
@@ -9,4 +8,3 @@ $(document).ready(function() {
     eventDisplayDefault: true
   })
 })
->>>>>>> 110abd5 (calendar library)
