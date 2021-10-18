@@ -1,10 +1,11 @@
 // Client facing scripts here
-
-$(document).ready(function() {
   $('#calendar').evoCalendar({
-    theme: 'Midnight Blue',
+    'theme': 'Midnight Blue',
     todayHighlight: true,
     calendarEvents: true,
     eventDisplayDefault: true
-  })
-})
+  }).on('selectDate', function(newDate, oldDate) {
+    prompt("Enter event time: ");
+  })/*.on('click', function(selectDate) {
+    alert("Hello");
+  });*/
