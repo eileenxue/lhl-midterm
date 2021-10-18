@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
     <title>Event Options</title>
-    <link rel="stylesheet" href="/styles/options.css" type="text/css"/>
-
-
+    <link rel="stylesheet" type="text/css" href="styles/options.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="css/evo-calendar.midnight-blue.css"/>-->
+    <script type="module" src="scripts/app.js"></script>
   </head>
 
   <body>
+
+    <!-- Add jQuery library (required) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <!-- Add the evo-calendar.js for.. obviously, functionality! -->
+    <script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script>
+
     <header>
       <h1>Foodle</h1>
     </header>
@@ -21,73 +27,12 @@
       <p>Please select your availability in the calendar below:<p>
     </main>
 
-    <div class="calendar">
-      <div class ="month-header">
-        <h2>October</h2>
-        <div class="month-week-header">
-          <span>Month</span>
-          <span>Week</span>
-          <span>Year</span>
-        </div>
-      </div>
-
-      <div class="days-of-week">
-        <span>Sun</span>
-        <span>Mon</span>
-        <span>Tue</span>
-        <span>Wed</span>
-        <span>Thu</span>
-        <span>Fri</span>
-        <span>Sat</span>
-      </div>
-      <div class="days-in-month">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>5</span>
-        <span>6</span>
-        <span>7</span>
-      </div>
-      <div class="days-in-month">
-        <span>8</span>
-        <span>9</span>
-        <span>10</span>
-        <span>11</span>
-        <span>12</span>
-        <span>13</span>
-        <span>14</span>
-      </div>
-      <div class="days-in-month">
-        <span>15</span>
-        <span>16</span>
-        <span>17</span>
-        <span>18</span>
-        <span>19</span>
-        <span>20</span>
-        <span>21</span>
-      </div>
-      <div class="days-in-month">
-        <span>22</span>
-        <span>23</span>
-        <span>24</span>
-        <span>25</span>
-        <span>26</span>
-        <span>27</span>
-        <span>28</span>
-      </div>
-      <div class="days-in-month">
-        <span>29</span>
-        <span>30</span>
-        <span>31</span>
-        <span class="next month">1</span>
-        <span class="next month">2</span>
-        <span class="next month">3</span>
-        <span class="next month">4</span>
-      </div>
+    <div class="calendar-container">
+      <div id="calendar"></div>
     </div>
 
     <footer>
     </footer>
+
   </body>
 </html>

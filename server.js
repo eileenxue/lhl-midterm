@@ -5,7 +5,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8080;
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
-const app = express();
+const app = express("require");
 const morgan = require("morgan");
 
 // PG database client/connection setup
@@ -32,6 +32,7 @@ app.use(
 );
 
 app.use(express.static("public"));
+app.use('/scripts', express.static(__dirname + "/public/scripts"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -57,6 +58,6 @@ app.listen(PORT, () => {
 });
 
 app.get("/options", (req, res) => {
-  const templateVars = {}
-  res.render("options", templateVars)
+  const templateVars = {};
+  res.render("options", templateVars);
 });
