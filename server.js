@@ -57,6 +57,6 @@ app.listen(PORT, () => {
 });
 
 app.get("/options", (req, res) => {
-  const templateVars = {}
-  res.render("options", templateVars)
+  const templateVars = {};
+  res.render("options", templateVars);
 });
