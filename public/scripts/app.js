@@ -5,7 +5,8 @@
     calendarEvents: true,
     eventDisplayDefault: true
   }).on('selectDate', function(newDate, oldDate) {
-    prompt("Enter event time: ");
-  })/*.on('click', function(selectDate) {
-    alert("Hello");
-  });*/
+    //prompt("Enter event time: ");
+      $('#exampleModalCenter').modal('show').on('shown.bs.modal', function () {
+        $('.modal-body');
+      });
+  });

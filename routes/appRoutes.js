@@ -13,12 +13,18 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/options", (req, res) => {
-    res.render("options");
-  });
-
   router.get("/create", (req, res) => {
     res.render("create");
+  });
+
+  router.get("/options", (req, res) => {
+    const templateVars = {};
+    res.render("options", templateVars);
+  });
+
+  router.get("/summary", (req, res) => {
+    const templateVars = {};
+    res.render("summary", templateVars);
   });
 
   return router;

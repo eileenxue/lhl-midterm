@@ -5,3 +5,16 @@ html {
 .calendar-container {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.text-spacer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
