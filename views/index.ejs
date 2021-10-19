@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Welcome to Foodle</title>
 
   <!-- Bootstrap -->
@@ -17,11 +19,17 @@
 </head>
 
 <body>
-  <main class="text-center">
-    <h1>Foodle 🍜</h1>
-    <h2>Find the perfect time to eat with your friends!</h2>
-    <a href="/create" class="btn btn-light mt-3">Create Event</a>
-  </main>
+    <div class="fullscreen">
+      <video loop muted autoplay poster="" class="fullscreen-video">
+        <source src="../assets/pexels-eating-video.mp4" type="video/mp4">
+        <!-- add .ogv and .webm to cover all compatible devices  -->
+      </video>
+    </div>
+    <div class="index-content text-center">
+      <h1>Foodle 🍜</h1>
+      <h2>Find the perfect time to eat with your friends!</h2>
+      <a href="/create" class="btn btn-light mt-3">Create Event</a>
+    </div>
 </body>
 
 </html>
