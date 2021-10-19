@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Create Event</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/event.css" type="text/css">
+  </head>
+
+  <body>
+    <!-- Refer to header in partials folder -->
+    <%- include('partials/_header') %>
+
+    <main class="container mt-4 event-page">
+      <div class="event-invite text-center">
+        <p>Invite people to vote!</p>
+        <div class="event-invite-link">
+          <input type="text" name="share-link" value="www.foodle.com/event/fjdlflfjlk" class="form-control">
+          <!-- Make click to copy button -->
+          <button class="btn btn-primary">Copy</button>
+        </div>
+      </div>
+      <div class="event-details">
+        <!-- Currently this data is hardcoded. Need to pull from the database -->
+        <div class="event-heading text-center">
+          <h1>Graduation Party</h1>
+          <p>Created by Alice</p>
+        </div>
+        <div class="event-location">
+          <span class="event-label">Location:</span>
+          <p>123 Green St</p>
+        </div>
+        <div class="event-description">
+        <span class="event-label">Description:</span>
+        <p>This will be an awesome party! Please join us!</p>
+      </div>
+      </div>
+      <div class="event-voting text-center">
+      <p>Add your name and email to vote</p>
+      <!-- Decide how we want to implement this voting area -->
+
+
+      </div>
+    </main>
+
+    <!-- Refer to footer in the partials folder -->
+    <%- include('partials/_footer') %>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>

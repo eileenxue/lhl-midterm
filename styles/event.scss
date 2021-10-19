@@ -1,0 +1,27 @@
+.event-page{
+  width: 100%;
+}
+
+.event-invite{
+  background-color: aliceblue;
+  padding: 2em;
+  margin-bottom: 2em;
+
+  &-link{
+    display: flex;
+  }
+}
+
+.event-details{
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+
+// Media Queries for Event Page
+@media (min-width: 768px) {
+  .event-page{
+    width: 60vw;
+    margin: 0 auto;
+  }
+}

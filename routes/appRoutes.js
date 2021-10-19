@@ -21,5 +21,11 @@ module.exports = (db) => {
     res.render("create");
   });
 
+  router.get("/event/:customURL", (req, res) => {
+    // Get the custom generated URL
+    // const customURL = req.params.customURL;
+    res.render("event");
+  });
+
   return router;
 };
