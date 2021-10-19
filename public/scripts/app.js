@@ -1,12 +1,21 @@
 // Client facing scripts here
-  $('#calendar').evoCalendar({
-    'theme': 'Midnight Blue',
+$(document).ready(function() {
+  const calendar = $('#calendar').evoCalendar({
     todayHighlight: true,
     calendarEvents: true,
-    eventDisplayDefault: true
-  }).on('selectDate', function(newDate, oldDate) {
-    //prompt("Enter event time: ");
-      $('#exampleModalCenter').modal('show').on('shown.bs.modal', function () {
-        $('.modal-body');
-      });
+    eventDisplayDefault: true,
+    sidebarDisplayDefault: false,
+    theme: 'royal-navy',
   });
+  calendar.on('selectDate', function(newDate, oldDate) {
+    var text = "";
+    $("#eventform").submit(function(event) {
+      event.preventDefault();
+      text = $(this).find("#eventvalue").val();
+      console.log(text);
+      $("#eventvalue").val("");
+    });
+    $('#exampleModalCenter').modal('show').on(function () {
+    });
+  });
+});
