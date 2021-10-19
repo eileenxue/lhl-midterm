@@ -50,68 +50,6 @@ app.use("/", appRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get("/", (req, res) => {
-  res.render("index");
-});
-
-function generateRandomString() {
-  let text = "";
-  let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (let i = 0; i < 8; i++) {
-    text += str.charAt(Math.floor(Math.random() * str.length));
-  }
-  return text;
-}
-
-app.post("/create", (req, res) => {
-  // We get the data into the form fields
-  const name = req.body.name;
-  const email = req.body.email;
-  const title = req.body.title;
-  const description = req.body.description;
-  const location = req.body.location;
-  console.log(name);
-  console.log(email);
-
-  const queryParams1 = [name, email];
-  let queryString1 = `INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *`;
-
-  // const queryParams2 = [title, description, location];
-  let queryString2 = `INSERT INTO events (user_id, title, description, location, url) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
-
-  // const listOfQueries = [
-  //   db.query(queryString1, queryParams1),
-  //   db.query(queryString2, queryParams2),
-  // ];
-
-  // return Promise.all(listOfQueries)
-  //   .then((results) => {
-  //     console.log(results);
-  //   })
-  //   .catch((err) => console.log(err));
-
-  return db
-    .query(queryString1, queryParams1)
-    .then((resdb) => {
-      console.log(resdb.rows[0].id);
-      const url = generateRandomString();
-      const user_id = resdb.rows[0].id;
-      const queryParams2 = [user_id, title, description, location, url];
-      return db
-        .query(queryString2, queryParams2)
-        .then(() => res.redirect("/options"))
-        .catch((err) => console.log(err));
-    })
-    .catch((err) => err);
-
-  // return db
-  //   .query(queryString1, queryParams1)
-  //   .then((res) => res.rows[0])
-  //   .catch((err) => err);
-});
-
-app.post;
-
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
