@@ -22,11 +22,6 @@ module.exports = (db) => {
     res.render("options", templateVars);
   });
 
-  router.get("/summary", (req, res) => {
-    const templateVars = {};
-    res.render("summary", templateVars);
-  });
-
   router.get("/event/:customURL", (req, res) => {
     // Get the custom generated URL
     res.render("event");
@@ -36,7 +31,6 @@ module.exports = (db) => {
   // Once we get this working, get the custom URL working (see above)
   // Remove this at the end when testing finished
   router.get("/event/test", (req, res) => {
-
     res.render("event");
   });
 
