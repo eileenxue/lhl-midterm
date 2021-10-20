@@ -34,7 +34,7 @@ app.use(
 );
 
 app.use(express.static("public"));
-app.use("/scripts", express.static(__dirname + "/public/scripts"));
+app.use(express.static(__dirname + "/public/scripts"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -107,22 +107,46 @@ app.post("/create", (req, res) => {
   //   .then((res) => res.rows[0])
   //   .catch((err) => err);
 });
-app.post("/options/:eventID", (req, res) => {
+app.post("/options", (req, res) => {
   const event_id = req.params.eventID;
-  const start_time = req.body.eventtime;
+  const start_time = req.body.start_time;
+  const end_time = req.body.end_time;
+  console.log(req.params.eventID);
   console.log(event_id);
   console.log(start_time);
-  const queryParams1 = [event_id, start_time];
-  let queryString1 = `INSERT INTO timeslots (event_id, start_time) VALUES ($1, $2) RETURNING *`;
+  console.log(end_time);
+  const queryParams1 = [event_id, start_time, end_time];
+  let queryString1 = `INSERT INTO votes (event_id, start_time, end_time) VALUES ($1, $2, $3) RETURNING *`;
   return db
-  .query(queryString1, queryParams1)
-  .then((resdb) => {
-    const event_id = resdb.rows[0].event_id;
-    return db
-      .then(() => res.redirect("/event"))
-      .catch((err) => console.log(err));
-  })
-  .catch((err) => err);
+    .query(queryString1, queryParams1)
+    .then((resdb) => {
+      const event_id = resdb.rows[0].event_id;
+      return db
+        .then(() => res.redirect(`/event/${event_id}`))
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => err);
+});
+
+app.get("/options/:eventID", (req, res) => {
+  const valueAsKey = function(hours, minutes) {
+    let time = Math.floor(hours/12) == 1 ? 'PM' : 'AM';
+    return ((hours+11) % 12 + 1) + ":" + (minutes < 10 ? '0' : "") + minutes + ' ' + time;
+  }
+  let times = [];
+  for (let i = 0 ; i < 24; i++) {
+      for(let j = 0; j < 60; j += 30) {
+          let value = (i < 10 ? '0' : '') + i + ":" + (j == 0 ? "00" : j);
+          const key = valueAsKey(i, j);
+          if(times.length > 0) {
+              times[times.length-1][1] += " - " + key;
+          }
+          times.push([value, key]);
+      }
+  }
+  times[47][1] += " - 12:00 AM";
+  const templateVars = { eventID: req.params.eventID, timesList: times };
+  res.render("options", templateVars);
 });
 
 app.listen(PORT, () => {

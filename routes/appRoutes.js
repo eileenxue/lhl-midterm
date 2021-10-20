@@ -15,7 +15,7 @@ module.exports = (db) => {
     res.render("create");
   });
 
-  router.get("/options", (req, res) => {
+  /*router.get("/options/:eventID", (req, res) => {
     const valueAsKey = function(hours, minutes) {
       let time = Math.floor(hours/12) == 1 ? 'PM' : 'AM';
       return ((hours+11) % 12 + 1) + ":" + (minutes < 10 ? '0' : "") + minutes + ' ' + time;
@@ -32,14 +32,10 @@ module.exports = (db) => {
         }
     }
     times[47][1] += " - 12:00 AM";
-    const templateVars = { timesList : times };
+    const templateVars = { eventID: req.params.eventID, timesList: times };
     res.render("options", templateVars);
-  });
+  });*/
 
-  router.get("/options/:eventID", (req, res) => {
-    const templateVars = { eventID: req.params.eventID };
-    res.render("options", templateVars);
-  });
   router.get("/event/:customURL", (req, res) => {
     // Get the custom generated URL
     res.render("event");

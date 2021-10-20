@@ -1,25 +1,4 @@
 // Client facing scripts here
-// const valueAsKey = function(hours, minutes) {
-//     let time = Math.floor(hours/12) == 1 ? 'PM' : 'AM';
-//     return ((hours+11) % 12 + 1) + ":" + (minutes < 10 ? '0' : "") + minutes + ' ' + time;
-// }
-
-// const getAllTimes = function() {
-//     let times = [];
-//     for (let i = 0 ; i < 24; i++) {
-//         for(let j = 0; j < 60; j += 30) {
-//             let value = i + "-" + j;
-//             const key = valueAsKey(i, j);
-//             if(times.length > 0) {
-//                 times[times.length-1][1] += " - " + key;
-//             }
-//             times.push([value, key]);
-//         }
-//     }
-//     times[47][1] += " - 12:00 AM";
-//     return times;
-// }
-
 $('.opt').click(function(value) {
   const arg = $(document.getElementById(value.target.id));
   if(arg.hasClass("btn-light")) {
