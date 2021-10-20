@@ -18,9 +18,9 @@ module.exports = (db) => {
   });
 
   // EVENT GET ROUTES
-  router.get("/event", (req, res) => {
-    res.render("event");
-  });
+  // router.get("/event", (req, res) => {
+  //   res.render("event");
+  // });
 
   //OPTIONS ROUTE WITH SPECIFIC eventID
   router.get("/options/:eventID", (req, res) => {
@@ -46,13 +46,6 @@ module.exports = (db) => {
         res.render("event", {events: dbres.rows});
       })
       .catch((err) => console.log(err));
-  });
-
-  // Use for TESTING to see if existing database info can be rendered onto page
-  // Once we get this working, get the custom URL working (see above)
-  // Remove this at the end when testing finished
-  router.get("/event/test", (req, res) => {
-    res.render("event");
   });
 
   // POST ROUTES ********************************

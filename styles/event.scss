@@ -7,14 +7,33 @@
   padding: 2em;
   margin-bottom: 2em;
 
+  p{
+    font-weight: 600;
+  }
+
   &-link{
     display: flex;
+    align-items: center;
+
+    & input{
+      border-radius: 0;
+    }
+    & button{
+      border-radius: 0;
+    }
+  }
+  &-emoji{
+    padding-right: 0.5em;
   }
 }
 
 .event-details{
   max-width: 600px;
   margin: 0 auto;
+}
+
+.event-label{
+  font-weight: 600;
 }
 
 
