@@ -107,7 +107,7 @@ app.post("/create", (req, res) => {
   //   .then((res) => res.rows[0])
   //   .catch((err) => err);
 });
-app.post("/options", (req, res) => {
+app.post("/options/:eventID", (req, res) => {
   const event_id = req.params.eventID;
   const start_time = req.body.start_time;
   const end_time = req.body.end_time;
@@ -128,7 +128,7 @@ app.post("/options", (req, res) => {
     .catch((err) => err);
 });
 
-app.get("/options/:eventID", (req, res) => {
+app.get("/options", (req, res) => {
   const valueAsKey = function(hours, minutes) {
     let time = Math.floor(hours/12) == 1 ? 'PM' : 'AM';
     return ((hours+11) % 12 + 1) + ":" + (minutes < 10 ? '0' : "") + minutes + ' ' + time;
@@ -145,7 +145,7 @@ app.get("/options/:eventID", (req, res) => {
       }
   }
   times[47][1] += " - 12:00 AM";
-  const templateVars = { eventID: req.params.eventID, timesList: times };
+  const templateVars = { timesList: times };
   res.render("options", templateVars);
 });
 
