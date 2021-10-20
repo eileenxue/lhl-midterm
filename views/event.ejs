@@ -38,7 +38,6 @@
       </div>
 
       <div class="event-details">
-        <!-- Currently this data is hardcoded. Need to pull from the database -->
         <div class="event-heading text-center">
           <h1><%= event.event_title %></h1>
           <p>Created by <%= event.user_name %></p>
@@ -48,17 +47,100 @@
           <p><%= event.event_location %></p>
         </div>
         <div class="event-description">
-        <span class="event-label">Description:</span>
-        <p><%= event.event_description %></p>
-      </div>
+          <span class="event-label">Description:</span>
+          <p><%= event.event_description %></p>
+        </div>
       </div>
         <% } %>
       <% } %>
-      <div class="event-voting text-center">
-      <p>Add your name and email to vote</p>
+      <hr>
       <!-- Decide how we want to implement this voting area -->
+      <div class="event-voting">
+        <section id="vote-area">
+        <p>Add your name, email and votes</p>
+        <form>
+          <div class="new-entry">
+            <div class="new-entry-user">
+              <div class="form-floating mb-3">
+                <input type="text" name="name" class="form-control" placeholder="Name">
+                <label for="name">Name</label>
+              </div>
+              <!-- We need email as per the assignment requirements -->
+              <div class="form-floating mb-3">
+                <input type="email" name="email" class="form-control" placeholder="Email">
+                <label for="email">Email</label>
+              </div>
+            </div>
+            <div class="new-entry-timeslots">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                Oct 20, 2021 7:00 PM - 9:00 PM
+              </li>
+              <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                Oct 21, 2021 6:00 PM - 8:00 PM
+              </li>
+              <li class="list-group-item">
+                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                Oct 22, 2021 7:00 PM - 9:00 PM
+              </li>
+            </ul>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+        <hr>
+      </section>
 
-
+        <!-- Existing votes -->
+        <div class="vote-header">
+          <div class="vote-header-title">Votes</div>
+          <div class="btn btn-secondary" id="show-vote-area">Add New</div>
+        </div>
+        <div>
+          <table class="table text-center">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Name</th>
+                <th scope="col">Oct 20, 7-9PM</th>
+                <th scope="col">Oct 21, 6-8PM</th>
+                <th scope="col">Oct 22, 7-9PM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="">Edit</a></td>
+                <td>Hanna</td>
+                <td>✅</td>
+                <td></td>
+                <td>✅</td>
+              </tr>
+              <tr>
+                <td><a href="">Edit</a></td>
+                <td>Larry S</td>
+                <td></td>
+                <td></td>
+                <td>✅</td>
+              </tr>
+              <tr>
+                <td><a href="">Edit</a></td>
+                <td>Annie</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>2</td>
+                <td>1</td>
+                <td>2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </main>
 
@@ -76,7 +158,7 @@
         return new bootstrap.Tooltip(tooltipTriggerEl)
       })
 
-      // Copy URL
+      // Copy URL Link
       function clickToCopy() {
         const copyLink = document.getElementById("event-link");
         copyLink.select();
@@ -89,6 +171,13 @@
       function outCopy() {
         // document.getElementById("copy-btn").setAttribute("data-bs-original-title", "Copy this link");
       }
+
+      // Show/Hide Vote Area
+      $('#vote-area').hide();
+
+      $('#show-vote-area').click(function() {
+        $('#vote-area').slideToggle();
+      })
 
       </script>
   </body>

@@ -36,11 +36,40 @@
   font-weight: 600;
 }
 
+// List of Votes
+
+.vote-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1em;
+
+  &-title{
+    font-size: 1.5em;
+    font-weight: 600;
+    padding-right: 1em;
+  }
+}
+
+
+
 
 // Media Queries for Event Page
 @media (min-width: 768px) {
   .event-page{
     width: 60vw;
-    margin: 0 auto;
+  }
+
+  .new-entry{
+    display: flex;
+
+    &-user{
+      width: 100%;
+      padding-right: 1em;
+    }
+
+    &-timeslots{
+      width: 100%;
+    }
   }
 }
