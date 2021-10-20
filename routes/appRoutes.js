@@ -50,27 +50,11 @@ module.exports = (db) => {
   });
 
   router.get("/options/:eventID", (req, res) => {
-    const valueAsKey = function(hours, minutes) {
-      let time = Math.floor(hours/12) == 1 ? 'PM' : 'AM';
-      return ((hours+11) % 12 + 1) + ":" + (minutes < 10 ? '0' : "") + minutes + ' ' + time;
-    }
-    let times = [];
-    for (let i = 0 ; i < 24; i++) {
-        for(let j = 0; j < 60; j += 30) {
-            let value = (i < 10 ? '0' : '') + i + ":" + (j == 0 ? "00" : j);
-            const key = valueAsKey(i, j);
-            if(times.length > 0) {
-                times[times.length-1][1] += " - " + key;
-            }
-            times.push([value, key]);
-        }
-    }
-    times[47][1] += " - 12:00 AM";
 
     const event_id = req.params.eventID;
     const queryParams = [event_id];
 
-    const templateVars = { timesList: times, eventID: req.params.eventID };
+    const templateVars = { eventID: req.params.eventID };
     res.render(`options`, templateVars);
 
   });
@@ -130,26 +114,33 @@ module.exports = (db) => {
     //   .query(queryString1, queryParams1)
     //   .then((res) => res.rows[0])
     //   .catch((err) => err);
+
   });
   router.post("/options/:eventID", (req, res) => {
     const event_id = req.params.eventID;
-    const start_time = req.body.start_time;
-    const end_time = req.body.end_time;
-    console.log(event_id);
-    console.log(start_time);
-    console.log(end_time);
-    const queryParams1 = [event_id, start_time, end_time];
-    let queryString1 = `INSERT INTO timeslots (event_id, start_time, end_time) VALUES ($1, $2, $3) RETURNING *`;
-    return db
-      .query(queryString1, queryParams1)
-      .then((resdb) => {
-        const event_id = resdb.rows[0].event_id;
-        return db
-          .then(() => res.redirect(`/event/${event_id}`))
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => err);
-  });
+    const date_time = req.body["date-time"];
+    let queryString1 = `INSERT INTO timeslots (event_id, date_time) VALUES ($1, $2) RETURNING *`;
+    const promises = [];
+    for (let element of date_time) {
+      const promise = db.query(queryString1, [event_id, element]);
+      promises.push(promise);
+    }
+    Promise.all(promises).then(function() {
+      res.redirect(`/event/${event_id}`);
+    }).catch((err) => console.log(err));
+    //console.log(req.body);
+    //console.log(event_id);
+    //console.log(date_time);
+    //const queryParams1 = [event_id, date_time];
+    //return db
+      //.query(queryString1, queryParams1)
+      //.then((resdb) => {
+        // const event_id = resdb.rows[0].event_id;
+        //return db
+          //.catch((err) => console.log(err));
+      //})
+
+    });
 
   return router;
 };
