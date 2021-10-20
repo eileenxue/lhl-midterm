@@ -8,7 +8,7 @@ $(document).ready(function() {
     e.preventDefault();
     if (x < max_fields) {
       x++;
-      $(wrapper).append('<input type="text" class="form-control" id="datetimefield" name="date-time">');
+      $(wrapper).append('<div class="row g-3 input-container"><div class="col-auto"><label for="datetimefield" class="col-form-label">Enter here:</label></div><div class="col-auto"><input type="text" id="datetimefield" class="form-control" placeholder="6 - 8PM Oct 20 2021" name="date-time"></div><div class="col-auto"><button type="button" class="add btn btn-primary">Add More Slots</button></div>');
     }
   });
 });

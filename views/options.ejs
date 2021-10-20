@@ -18,29 +18,28 @@
   <body>
     <!-- Refer to header in partials folder -->
     <%- include('partials/_header') %>
-    <main>
-
-      <div class="text-spacer">
-          <p>Please enter the time of your event below:</p>
-      </div>
-
-      <form action="/options/<%=eventID%>" method="POST">
-        <div class="mb-3 input-container">
-          <button type="button" class="add btn btn-primary">Add</button>
-          <label for="datetimefield" class="form-label">Date and Time</label>
-          <input type="text" class="form-control" id="datetimefield" name="date-time">
+    <main class="container mt-4">
+      <h1>Select Date and Time</h1>
+      <form class="row g-3" action="/options/<%=eventID%>" method="POST">
+        <div class="row g-3 input-container">
+          <div class="col-auto">
+            <label for="datetimefield" class="col-form-label">Enter here:</label>
+          </div>
+          <div class="col-auto">
+            <input type="text" id="datetimefield" class="form-control" placeholder="6 - 8PM Oct 20 2021" name="date-time">
+          </div>
+        <div class="col-auto">
+          <button type="button" class="add btn btn-primary">Add More Slots</button>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="col-auto">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
       </form>
-
-    </div>
-
     </main>
 
     <footer>
       <!-- Refer to footer in the partials folder -->
       <%- include('partials/_footer') %>
-
       <!-- Bootstrap JS -->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </footer>
