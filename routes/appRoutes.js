@@ -43,7 +43,7 @@ module.exports = (db) => {
       .query(stringQuery, queryParams)
       .then((dbres) => {
         console.log(dbres.rows);
-        res.render("event");
+        res.render("event", {events: dbres.rows});
       })
       .catch((err) => console.log(err));
   });
