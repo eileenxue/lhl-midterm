@@ -72,24 +72,19 @@ app.post("/create", (req, res) => {
   const location = req.body.location;
   console.log(name);
   console.log(email);
-
   const queryParams1 = [name, email];
   let queryString1 = `INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *`;
-
   // const queryParams2 = [title, description, location];
   let queryString2 = `INSERT INTO events (user_id, title, description, location, url) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
-
   // const listOfQueries = [
   //   db.query(queryString1, queryParams1),
   //   db.query(queryString2, queryParams2),
   // ];
-
   // return Promise.all(listOfQueries)
   //   .then((results) => {
   //     console.log(results);
   //   })
   //   .catch((err) => console.log(err));
-
   return db
     .query(queryString1, queryParams1)
     .then((resdb) => {
@@ -99,18 +94,36 @@ app.post("/create", (req, res) => {
       const queryParams2 = [user_id, title, description, location, url];
       return db
         .query(queryString2, queryParams2)
-        .then(() => res.redirect("/options"))
+        .then((data) => {
+          console.log("data", data.rows);
+          const event_id = data.rows[0].id;
+          res.redirect(`/options/${event_id}`);
+        })
         .catch((err) => console.log(err));
     })
     .catch((err) => err);
-
   // return db
   //   .query(queryString1, queryParams1)
   //   .then((res) => res.rows[0])
   //   .catch((err) => err);
 });
-
-app.post;
+app.post("/options/:eventID", (req, res) => {
+  const event_id = req.params.eventID;
+  const start_time = req.body.eventtime;
+  console.log(event_id);
+  console.log(start_time);
+  const queryParams1 = [event_id, start_time];
+  let queryString1 = `INSERT INTO timeslots (event_id, start_time) VALUES ($1, $2) RETURNING *`;
+  return db
+  .query(queryString1, queryParams1)
+  .then((resdb) => {
+    const event_id = resdb.rows[0].event_id;
+    return db
+      .then(() => res.redirect("/event"))
+      .catch((err) => console.log(err));
+  })
+  .catch((err) => err);
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
