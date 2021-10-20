@@ -13,9 +13,9 @@ module.exports = (db) => {
   });
 
   // OPTIONS GET ROUTES
-  router.get("/options", (req, res) => {
-    res.render("options");
-  });
+  // router.get("/options", (req, res) => {
+  //   res.render("options");
+  // });
 
   // EVENT GET ROUTES
   // router.get("/event", (req, res) => {
@@ -23,10 +23,11 @@ module.exports = (db) => {
   // });
 
   //OPTIONS ROUTE WITH SPECIFIC eventID
-  router.get("/options/:eventID", (req, res) => {
-    const templateVars = { eventID: req.params.eventID };
-    res.render("options", templateVars);
-  });
+  // router.get("/options/:eventID", (req, res) => {
+
+  //   const templateVars = { eventID: req.params.eventID };
+  //   res.render("options", templateVars);
+  // });
 
   // EVENT ROUTE WITH SPECIFIC eventID
   router.get("/event/:eventID", (req, res) => {
@@ -46,6 +47,32 @@ module.exports = (db) => {
         res.render("event", {events: dbres.rows});
       })
       .catch((err) => console.log(err));
+  });
+
+  router.get("/options/:eventID", (req, res) => {
+    const valueAsKey = function(hours, minutes) {
+      let time = Math.floor(hours/12) == 1 ? 'PM' : 'AM';
+      return ((hours+11) % 12 + 1) + ":" + (minutes < 10 ? '0' : "") + minutes + ' ' + time;
+    }
+    let times = [];
+    for (let i = 0 ; i < 24; i++) {
+        for(let j = 0; j < 60; j += 30) {
+            let value = (i < 10 ? '0' : '') + i + ":" + (j == 0 ? "00" : j);
+            const key = valueAsKey(i, j);
+            if(times.length > 0) {
+                times[times.length-1][1] += " - " + key;
+            }
+            times.push([value, key]);
+        }
+    }
+    times[47][1] += " - 12:00 AM";
+
+    const event_id = req.params.eventID;
+    const queryParams = [event_id];
+
+    const templateVars = { timesList: times, eventID: req.params.eventID };
+    res.render(`options`, templateVars);
+
   });
 
   // POST ROUTES ********************************
