@@ -33,7 +33,7 @@ module.exports = (db) => {
   router.get("/event/:eventID", (req, res) => {
     const event_id = req.params.eventID;
     let stringQuery = `
-    SELECT DISTINCT users.name as user_name, events.title as event_title , events.location as event_location, events.description as event_description, events.url as event_url, timeslots.event_id as event_id, timeslots.date_time as date_time
+    SELECT DISTINCT users.name as user_name, events.title as event_title , events.location as event_location, events.description as event_description, events.url as event_url, timeslots.event_id as event_id, timeslots.date_time as date_time, timeslots.id as timeslot_id
     FROM events
     JOIN users ON events.user_id = users.id
     JOIN timeslots ON events.id = timeslots.event_id
@@ -145,10 +145,41 @@ module.exports = (db) => {
     });
 
     // NEED TO WORK ON THIS PART
-    router.post("/event/:eventID", (req, res) => {
-      const event_id = req.params.eventID;
+    router.post("/event", (req, res) => {
+      console.log(req.body);
+      const event_id = req.body.eventID;
       const name = req.body.name;
       const email = req.body.email;
+      // Figure out how to grab checkboxes as timeslot id
+      // We figure out how to grab the timeslots choices into an array
+      const timeslots = req.body.timeslots;
+      console.log(timeslots[0]);
+
+      // CHALLENGING SECTION
+      // Write two queries to insert into two different tables.
+      const queryParams1 = [name, email];
+      let queryString1 = `INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *`;
+      let queryString2 = 'INSERT INTO votes (user_id, time_id) VALUES ($1, $2) RETURNING *';
+
+      return db
+      .query(queryString1, queryParams1)
+      .then((resdb) => {
+        console.log(resdb.rows[0].id);
+        const user_id = resdb.rows[0].id;
+        const time_id = req.body["timeslots"];
+
+        // Need to loop through the array of timeslots and insert into the timeslots database table
+        const promises = [];
+        for (let element of timeslots) {
+          console.log(element);
+          const promise = db.query(queryString2, [user_id, element]);
+          promises.push(promise);
+        }
+        Promise.all(promises).then(function() {
+          res.redirect(`/event/${event_id}`);
+        }).catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
 
     });
 

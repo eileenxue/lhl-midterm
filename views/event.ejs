@@ -74,13 +74,15 @@
             <ul class="list-group">
               <% for(let event of events) { %>
               <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="" aria-label="timeslot">
+                <!--<input class="form-check-input me-1" type="checkbox" value="<%= event.timeslot_id %>" aria-label="timeslot" id="checkboxfield" name="checkboxfield">-->
+                <input type="checkbox" name="timeslots" value="<%= event.timeslot_id %>">
                 <%= event.date_time %>
               </li>
               <% } %>
             </ul>
-            </div>
           </div>
+        </div>
+        <input name="eventID" value="<%= events[0].event_id %>" hidden>
           <button type="submit" class="btn btn-success">Submit</button>
         </form>
         <hr>
