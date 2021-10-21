@@ -33,10 +33,12 @@ module.exports = (db) => {
   router.get("/event/:eventID", (req, res) => {
     const event_id = req.params.eventID;
     let stringQuery = `
-    SELECT users.name as user_name, events.title as event_title , events.location as event_location, events.description as event_description, events.url as event_url
+    SELECT DISTINCT users.name as user_name, events.title as event_title , events.location as event_location, events.description as event_description, events.url as event_url, timeslots.event_id as event_id, timeslots.date_time as date_time
     FROM events
     JOIN users ON events.user_id = users.id
-    WHERE events.id = $1;
+    JOIN timeslots ON events.id = timeslots.event_id
+    WHERE event_id = $1
+    GROUP BY events.id, users.name, timeslots.id;
     `;
     const queryParams = [event_id];
 
@@ -139,6 +141,14 @@ module.exports = (db) => {
         //return db
           //.catch((err) => console.log(err));
       //})
+
+    });
+
+    // NEED TO WORK ON THIS PART
+    router.post("/event/:eventID", (req, res) => {
+      const event_id = req.params.eventID;
+      const name = req.body.name;
+      const email = req.body.email;
 
     });
 

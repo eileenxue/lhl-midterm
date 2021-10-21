@@ -22,13 +22,12 @@
     <%- include('partials/_header') %>
 
     <% if (events.length > 0) { %>
-      <% for(event of events) { %>
     <main class="container mt-4 event-page">
       <div class="event-invite text-center">
         <p>Invite people to vote!</p>
         <div class="event-invite-link">
           <div class="event-invite-emoji">🔗</div>
-          <input id="event-link" type="text" name="share-link" value="www.foodle.com/event/<%= event.event_url %>" class="form-control">
+          <input id="event-link" type="text" name="share-link" value="www.foodle.com/event/<%= events[0].event_url %>" class="form-control">
             <button id="copy-btn" type="button" class="btn btn-primary" onclick="clickToCopy()" onmouseout="outCopy()"
             data-bs-toggle="tooltip" data-bs-placement="top" title="Copy this link">
               Copy
@@ -36,29 +35,29 @@
           </div>
         </div>
       </div>
-
       <div class="event-details">
         <div class="event-heading text-center">
-          <h1><%= event.event_title %></h1>
-          <p>Created by <%= event.user_name %></p>
+          <h1><%= events[0].event_title %></h1>
+          <p>Created by <%= events[0].user_name %></p>
         </div>
         <div class="event-location">
           <span class="event-label">Location:</span>
-          <p><%= event.event_location %></p>
+          <p><%= events[0].event_location %></p>
         </div>
         <div class="event-description">
           <span class="event-label">Description:</span>
-          <p><%= event.event_description %></p>
+          <p><%= events[0].event_description %></p>
         </div>
       </div>
-        <% } %>
-      <% } %>
+
       <hr>
       <!-- Decide how we want to implement this voting area -->
       <div class="event-voting">
         <section id="vote-area">
-        <p>Add your name, email and votes</p>
-        <form>
+        <div class="vote-header-title">New Vote</div>
+        <p>Add your name, email and preferred options!</p>
+        <!-- Update this with eventID at the back -->
+        <form method="POST" action="/event">
           <div class="new-entry">
             <div class="new-entry-user">
               <div class="form-floating mb-3">
@@ -73,18 +72,12 @@
             </div>
             <div class="new-entry-timeslots">
             <ul class="list-group">
+              <% for(let event of events) { %>
               <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                Oct 20, 2021 7:00 PM - 9:00 PM
+                <input class="form-check-input me-1" type="checkbox" value="" aria-label="timeslot">
+                <%= event.date_time %>
               </li>
-              <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                Oct 21, 2021 6:00 PM - 8:00 PM
-              </li>
-              <li class="list-group-item">
-                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
-                Oct 22, 2021 7:00 PM - 9:00 PM
-              </li>
+              <% } %>
             </ul>
             </div>
           </div>
@@ -104,28 +97,30 @@
               <tr>
                 <th scope="col"></th>
                 <th scope="col">Name</th>
-                <th scope="col">Oct 20, 7-9PM</th>
-                <th scope="col">Oct 21, 6-8PM</th>
-                <th scope="col">Oct 22, 7-9PM</th>
+                <% for(let event of events) { %>
+                <th scope="col"><%= event.date_time %></th>
+                <!-- <th scope="col">Oct 21, 6-8PM</th>
+                <th scope="col">Oct 22, 7-9PM</th> -->
+                <% } %>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><a href="">Edit</a></td>
+                <td><button class="btn btn-outline-secondary">Edit</button></td>
                 <td>Hanna</td>
                 <td>✅</td>
                 <td></td>
                 <td>✅</td>
               </tr>
               <tr>
-                <td><a href="">Edit</a></td>
+                <td><button class="btn btn-outline-secondary">Edit</button></td>
                 <td>Larry S</td>
                 <td></td>
                 <td></td>
                 <td>✅</td>
               </tr>
               <tr>
-                <td><a href="">Edit</a></td>
+                <td><button class="btn btn-outline-secondary">Edit</button></td>
                 <td>Annie</td>
                 <td>✅</td>
                 <td>✅</td>
@@ -143,7 +138,7 @@
         </div>
       </div>
     </main>
-
+    <% } %>
     <!-- Refer to footer in the partials folder -->
     <%- include('partials/_footer') %>
 
