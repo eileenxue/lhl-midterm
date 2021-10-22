@@ -176,7 +176,8 @@ module.exports = (db) => {
           promises.push(promise);
         }
         Promise.all(promises).then(function() {
-          res.redirect(`/event/${event_id}`);
+          // res.redirect(`/event/${event_id}`);
+          res.send(`<script>alert("Successfully added!"); window.location.href = "/event/${event_id}"; </script>`);
         }).catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
