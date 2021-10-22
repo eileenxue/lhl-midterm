@@ -3,7 +3,6 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-
   background: rgb(163, 208, 219);
   background: linear-gradient(
     227deg,
@@ -18,19 +17,12 @@ body {
 
 // Video Full Cover Background
 .fullscreen{
-  position: fixed;
-  z-index: -1;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  max-width: 1920px;
-  margin: 0 auto;
-
   &-video{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
+    min-width: 100%;
+    min-height: 100%;
   }
 
   &::before{
@@ -48,10 +40,12 @@ body {
 .index-content{
   color: white;
   padding: 2em;
+  z-index: 100;
 
   // logo
   h1{
     font-size: 4rem;
+    font-family: 'Fredoka One', sans-serif;
   }
 
   // tagline
