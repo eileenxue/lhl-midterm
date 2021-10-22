@@ -1,5 +1,24 @@
-LHL Node Skeleton
-=========
+# Foodle 🍜
+
+This project was developed by Yavuz, Emily and Eileen for Lighthouse Lab's Midterm Project.
+
+Foodle is a clone project inspired by Doodle, the scheduling app. Our app was designed specifically for helping you find the ideal times to eat with your friends!
+
+We had one week to create this MVP app, feel free to take a look! Thank you.
+
+## App Demo
+### Landing Page & Create New Event
+![Foodle's Landing Page and Create Page](docs/foodle-create.gif)
+
+### Adding New Timeslots
+![Foodle's Adding Timeslots](docs/foodle-timeslots.gif)
+
+### Final Event Page & Votes
+![Foodle's Event Page](docs/foodle-event.gif)
+
+See below for original instructions for setting up the project.
+
+# LHL Node Skeleton
 
 ## Project Setup
 
@@ -41,4 +60,3 @@ The following steps are only for _one_ of the group members to perform.
 - Node 10.x or above
 - NPM 5.x or above
 - PG 6.x
-- Evo-calendar 1.1.3
